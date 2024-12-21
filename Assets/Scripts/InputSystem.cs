@@ -28,7 +28,7 @@ public class InputSystem : MonoBehaviour {
         return new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
     }
 
-    public bool GetJump() {
+    public bool IsJumping() {
         return Input.GetButton("Jump");
     }
 
@@ -37,5 +37,9 @@ public class InputSystem : MonoBehaviour {
             return Vector2.zero;
         }
         return (Vector2) Input.mousePosition - previousMousePositions.Peek();
+    }
+
+    public bool IsSprinting() {
+        return Input.GetKey(KeyCode.LeftShift);
     }
 }
