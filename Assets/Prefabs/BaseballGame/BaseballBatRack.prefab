@@ -178,6 +178,11 @@ MonoBehaviour:
   baseballBatPrefab: {fileID: 8062282198734856535, guid: 0118a3d5eb3ab1e40b49b96fd1d2d272,
     type: 3}
   spawnPosition: {fileID: 2524773530845935548}
+  baseballBatSO: {fileID: 11400000, guid: a6379d5d437c82d46ab1945a185dacb5, type: 2}
+  materials:
+  - {fileID: 2100000, guid: c365e0e747db7994db6e1ec468b86bf2, type: 2}
+  - {fileID: 2100000, guid: c0f898dc3a9cfb54fa1ef32976e6a703, type: 2}
+  niceProbability: 0.8
 --- !u!1 &9005350484150580299
 GameObject:
   m_ObjectHideFlags: 0

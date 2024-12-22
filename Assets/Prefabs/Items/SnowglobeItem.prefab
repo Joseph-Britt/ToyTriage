@@ -48,7 +48,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8499688278731111888
 Transform:
   m_ObjectHideFlags: 0
@@ -81,7 +81,7 @@ ParticleSystem:
   emitterVelocityMode: 1
   looping: 1
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -4934,7 +4934,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: SnowglobeItem
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 5855418156957184180, guid: 5b525a6ccf98eee4fb6f4eb0e0d81a7e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 8672042234012558114, guid: 5b525a6ccf98eee4fb6f4eb0e0d81a7e, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 3752505111416244005, guid: 5b525a6ccf98eee4fb6f4eb0e0d81a7e,
@@ -4955,6 +4961,12 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 3477592222725404119}
   m_SourcePrefab: {fileID: 100100000, guid: 5b525a6ccf98eee4fb6f4eb0e0d81a7e, type: 3}
+--- !u!23 &2448420826462696284 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 4929745165483164364, guid: 5b525a6ccf98eee4fb6f4eb0e0d81a7e,
+    type: 3}
+  m_PrefabInstance: {fileID: 7319317922892542352}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &3806086034666996004 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5855418156957184180, guid: 5b525a6ccf98eee4fb6f4eb0e0d81a7e,
@@ -4973,6 +4985,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73e1e8b6f06f72c4cba095fd9648adf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: fa22995a96ce4d84e8cfbb7b2a79c73b, type: 2}
+  snowParticles: {fileID: 2469601479705636336}
+  shakeTime: 1
+  snowTime: 5
+  visualsToColor:
+  - {fileID: 2448420826462696284}
 --- !u!95 &3477592222725404119
 Animator:
   serializedVersion: 5

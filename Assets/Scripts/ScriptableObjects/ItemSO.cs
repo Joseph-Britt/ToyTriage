@@ -9,6 +9,7 @@ public class ItemSO : ScriptableObject {
 
     public string itemName;
     [NonSerialized] public Material material;
+    [NonSerialized] public Gradient gradient;
     [NonSerialized] public bool isNice;
     public int guessedNiceReward;
     public int guessedNaughtyReward;

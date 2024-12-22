@@ -9,6 +9,19 @@ public class BaseballPlate : MonoBehaviour, IInteractable {
     [SerializeField] private BaseballPitchingMachine pitchingMachine;
     [SerializeField] private CinemachineVirtualCamera battingCamera;
     [SerializeField] private BaseballBat playerBaseballBatItem;
+    [SerializeField] private float cameraDelay = 1f;
+
+    private float timer;
+    private bool finished;
+
+    private void Update() {
+        if (timer > 0) {
+            timer -= Time.deltaTime;
+        } else if (finished) {
+            EndInteraction();
+            finished = false;
+        }
+    }
 
     public void Interact() {
         Player.Instance.StartInteraction(EndInteraction);
@@ -20,7 +33,8 @@ public class BaseballPlate : MonoBehaviour, IInteractable {
     }
 
     private void PlayerBaseballBatItem_OnHit(object sender, System.EventArgs e) {
-        EndInteraction();
+        timer = cameraDelay;
+        finished = true;
     }
 
     private void EndInteraction() {
@@ -32,6 +46,5 @@ public class BaseballPlate : MonoBehaviour, IInteractable {
         playerBaseballBatItem.OnHit -= PlayerBaseballBatItem_OnHit;
 
         Player.Instance.EndInteraction();
-        Player.Instance.Unequip();
     }
 }

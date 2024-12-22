@@ -21,8 +21,9 @@ public class BaseballBatRack : MonoBehaviour, IInteractable {
     private void Update() {
         if (baseballBat == null) {
             if (spawnTimer <= 0) {
-                baseballBat = Instantiate(baseballBatPrefab, spawnPosition);
                 GenerateData();
+                baseballBat = Instantiate(baseballBatPrefab, spawnPosition);
+                baseballBat.GetComponentInChildren<Renderer>().material = material;
                 spawnTimer = spawnRate;
             } else {
                 spawnTimer -= Time.deltaTime;
@@ -44,6 +45,5 @@ public class BaseballBatRack : MonoBehaviour, IInteractable {
     private void GenerateData() {
         isNice = Random.Range(0f, 1f) < niceProbability;
         material = materials[Random.Range(0, materials.Length)];
-        Debug.Log("next: " + isNice + ", curr: " + baseballBatSO.isNice);
     }
 }

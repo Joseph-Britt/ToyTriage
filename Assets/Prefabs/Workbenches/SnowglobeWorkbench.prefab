@@ -346,6 +346,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1238551668749327196}
   - {fileID: 4638235912244714688}
   - {fileID: 555524057573508104}
   - {fileID: 2223567242479274756}
@@ -386,6 +387,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f9074e9e25231f44813a655374c33e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerSnowglobeItem: {fileID: 0}
+  spawnRate: 2
+  snowglobePrefab: {fileID: 5855418156957184180, guid: 5b525a6ccf98eee4fb6f4eb0e0d81a7e,
+    type: 3}
+  spawnPosition: {fileID: 1238551668749327196}
+  snowglobeSO: {fileID: 11400000, guid: fa22995a96ce4d84e8cfbb7b2a79c73b, type: 2}
+  materials:
+  - {fileID: 2100000, guid: a8300c4027f76c641817f178eb114609, type: 2}
+  niceProbability: 0.6
 --- !u!1 &8262463287611853108
 GameObject:
   m_ObjectHideFlags: 0
@@ -491,6 +501,37 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &8793457144237409254
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1238551668749327196}
+  m_Layer: 7
+  m_Name: SpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1238551668749327196
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8793457144237409254}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.15, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5742218882845815200}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8823349670993704087
 GameObject:
   m_ObjectHideFlags: 0

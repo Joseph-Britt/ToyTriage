@@ -204,7 +204,7 @@ Transform:
   m_GameObject: {fileID: 6288087596767523647}
   serializedVersion: 2
   m_LocalRotation: {x: 0.23921476, y: -0.107218266, z: 0.015276456, w: 0.9649079}
-  m_LocalPosition: {x: 1.162, y: 3.442, z: -2.932}
+  m_LocalPosition: {x: 0.436, y: 3.442, z: -2.932}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -275,7 +275,7 @@ Transform:
   m_GameObject: {fileID: 8407061976032232333}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -1.5, y: 0, z: 0}
+  m_LocalPosition: {x: -2, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -353,3 +353,4 @@ MonoBehaviour:
   playerHittingPosition: {fileID: 4790941392542094295}
   pitchingMachine: {fileID: 0}
   battingCamera: {fileID: 9179712831259633463}
+  playerBaseballBatItem: {fileID: 0}

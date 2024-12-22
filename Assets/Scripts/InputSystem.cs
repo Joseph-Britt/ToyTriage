@@ -50,4 +50,8 @@ public class InputSystem : MonoBehaviour {
     public bool GetMouseButtonUp(int button) {
         return Input.GetMouseButtonUp(button);
     }
+
+    public bool GetMouseButton(int button) {
+        return Input.GetMouseButton(button);
+    }
 }

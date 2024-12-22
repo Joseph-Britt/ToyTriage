@@ -10,12 +10,14 @@ public class SnowglobeWorkbench : MonoBehaviour, IInteractable {
     [SerializeField] private Transform spawnPosition;
     [SerializeField] private ItemSO snowglobeSO;
     [SerializeField] private Material[] materials;
+    [SerializeField] private Gradient[] gradients;
     [SerializeField] private float niceProbability = 0.6f;
 
     private float spawnTimer;
     private GameObject snowglobe;
     private bool isNice;
     private Material material;
+    private Gradient gradient;
 
     private void Update() {
         if (snowglobe == null) {
@@ -33,6 +35,7 @@ public class SnowglobeWorkbench : MonoBehaviour, IInteractable {
         if (snowglobe != null && !Player.Instance.HasItemEquipped()) {
             snowglobeSO.isNice = isNice;
             snowglobeSO.material = material;
+            snowglobeSO.gradient = gradient;
             Player.Instance.Equip(playerSnowglobeItem);
             
             Destroy(snowglobe);
@@ -43,6 +46,6 @@ public class SnowglobeWorkbench : MonoBehaviour, IInteractable {
     private void GenerateData() {
         isNice = Random.Range(0f, 1f) < niceProbability;
         material = materials[Random.Range(0, materials.Length)];
-        Debug.Log("next: " + isNice + ", curr: " + snowglobeSO.isNice);
+        gradient = gradients[Random.Range(0, gradients.Length)];
     }
 }

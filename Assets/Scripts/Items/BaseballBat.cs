@@ -9,36 +9,46 @@ public class BaseballBat : Item {
 
     [SerializeField] private float hitCastMaxDistance = 0.5f;
     [SerializeField] private LayerMask hitCheckLayerMask;
-    [SerializeField] private float swingCooldown = 2f;
+    [SerializeField] private float swingTime = 2f;
     [SerializeField] private Renderer[] visualsToColor;
+
+    private enum State {
+        IDLE,
+        SWINGING
+    }
 
     private Animator animator;
     private const string SWING = "Swing";
-    private float swingTimer;
+    private float timer;
+    private State state;
 
     private void Awake() {
         animator = GetComponent<Animator>();
         OnHit = new EventHandler<EventArgs>(OnHit);
     }
 
-    public void Update() {
-        if (swingTimer > 0) {
-            swingTimer -= Time.deltaTime;
-        }
-        Debug.Log(swingTimer);
-    }
-
     public override void HandleUse() {
-        if (InputSystem.Instance.GetMouseButtonDown(0) && swingTimer <= 0) {
-            animator.SetTrigger(SWING);
-            swingTimer = swingCooldown;
+        switch (state) {
+            case State.IDLE:
+                if (InputSystem.Instance.GetMouseButton(0)) {
+                    animator.SetTrigger(SWING);
+                    state = State.SWINGING;
+                    timer = swingTime;
+                }
+                break;
+            case State.SWINGING:
+                if (timer > 0) {
+                    timer -= Time.deltaTime;
+                } else {
+                    state = State.IDLE;
+                }
+                break;
         }
     }
 
     public override void Equip() {
-        if (!gameObject.activeSelf) {
-            gameObject.SetActive(true);
-        }
+        gameObject.SetActive(true);
+        state = State.IDLE;
         foreach (Renderer visual in visualsToColor) {
             visual.material = GetData().material;
         }
@@ -54,6 +64,9 @@ public class BaseballBat : Item {
                 return;
             }
             baseball.Hit();
+            if (!GetData().isNice) {
+                Debug.Log("Bat broke!");
+            }
             OnHit?.Invoke(this, EventArgs.Empty);
         }
     }
