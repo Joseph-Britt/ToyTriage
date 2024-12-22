@@ -14,6 +14,8 @@ public class Player : MonoBehaviour {
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float sprintSpeed = 8f;
     [SerializeField] private float rotationSpeed = 1f;
+    [SerializeField] private int minCameraAngle = -45;
+    [SerializeField] private int maxCameraAngle = 45;
     [SerializeField] private CinemachineVirtualCamera playerCamera;
     [SerializeField] private float jumpPower = 2f;
     [SerializeField] private float jumpCooldown = .2f;
@@ -67,12 +69,25 @@ public class Player : MonoBehaviour {
         Vector2 mouseDelta = rotationSpeed * Time.deltaTime * InputSystem.Instance.GetMousePositionDelta();
 
         // Rotate child camera only for xRotation
-        Vector3 xRotation = playerCamera.transform.rotation.eulerAngles + new Vector3(-mouseDelta.y, 0, 0);
+        Vector3 cameraAngles = playerCamera.transform.rotation.eulerAngles;
+        Vector3 xRotation = new Vector3(ClampAngle(cameraAngles.x - mouseDelta.y, minCameraAngle, maxCameraAngle), cameraAngles.y, cameraAngles.z);
         playerCamera.transform.rotation = Quaternion.Euler(xRotation);
 
         // Rotate parent for yRotation
         Vector3 yRotation = transform.rotation.eulerAngles + new Vector3(0, mouseDelta.x, 0);
         transform.rotation = Quaternion.Euler(yRotation);
+    }
+
+    private float ClampAngle(float angle, float min, float max) {
+        if (angle > 180) {
+            angle -= 360;
+        }
+        if (angle < min) {
+            return min;
+        } else if (angle > max) {
+            return max;
+        }
+        return angle;
     }
 
     private void HandleJumping() {

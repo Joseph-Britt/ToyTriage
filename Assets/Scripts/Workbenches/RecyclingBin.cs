@@ -9,9 +9,9 @@ public class RecyclingBin : MonoBehaviour, IInteractable {
             Item item = Player.Instance.Unequip();
             ItemSO data = item.GetData();
             if (!data.isNice) {
-                Debug.Log(data.guessedNaughtyReward);
+                ScoreSystem.Instance.Reward(data.guessedNaughtyReward);
             } else {
-                Debug.Log(data.guessedNaughtyPenalty);
+                ScoreSystem.Instance.Reward(data.guessedNaughtyPenalty);
             }
         }
     }

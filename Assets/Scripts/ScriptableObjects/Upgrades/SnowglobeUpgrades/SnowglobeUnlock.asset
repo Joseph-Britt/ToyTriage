@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ed7f47a169707f448f92c9e9250efb0, type: 3}
+  m_Name: SnowglobeUnlock
+  m_EditorClassIdentifier: 
+  title: Unlock
+  cost: 10
+  niceProbability: 0.6
+  specialProbability: 0.1
