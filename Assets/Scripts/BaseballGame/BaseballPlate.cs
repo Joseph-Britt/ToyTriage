@@ -33,7 +33,5 @@ public class BaseballPlate : MonoBehaviour, IInteractable {
 
         Player.Instance.EndInteraction();
         Player.Instance.Unequip();
-
-        // TODO: update score
     }
 }

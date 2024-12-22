@@ -325,9 +325,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5742218882845815200}
   - component: {fileID: 812589262664042068}
-  - component: {fileID: 4733950728867212092}
+  - component: {fileID: 3565577811022426775}
   m_Layer: 7
-  m_Name: Workbench
+  m_Name: SnowglobeWorkbench
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -374,7 +374,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 4, y: 1.15, z: 1.5}
   m_Center: {x: 0, y: 0.575, z: 0}
---- !u!114 &4733950728867212092
+--- !u!114 &3565577811022426775
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -383,7 +383,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6963304081740341596}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb4d0e17bd6127e4686ec88efd40da75, type: 3}
+  m_Script: {fileID: 11500000, guid: 4f9074e9e25231f44813a655374c33e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &8262463287611853108

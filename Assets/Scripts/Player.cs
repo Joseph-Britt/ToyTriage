@@ -20,8 +20,6 @@ public class Player : MonoBehaviour {
     [SerializeField] private LayerMask groundLayerMask;
     [Header("Interaction")]
     [SerializeField] private GameObject playerVisual;
-    [Header("Items")]
-    [SerializeField] Item[] items;
 
     private Rigidbody rb;
     private float jumpCooldownTimer;
@@ -107,13 +105,13 @@ public class Player : MonoBehaviour {
         }
     }
 
-    public bool Unequip() {
-        if (HasItemEquipped()) {
+    public Item Unequip() {
+        Item removed = item;
+        if (item != null) {
             item.Unequip();
             item = null;
-            return true;
         }
-        return false;
+        return removed;
     }
 
     public bool HasItemEquipped() {

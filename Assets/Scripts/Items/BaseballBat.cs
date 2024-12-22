@@ -10,6 +10,7 @@ public class BaseballBat : Item {
     [SerializeField] private float hitCastMaxDistance = 0.5f;
     [SerializeField] private LayerMask hitCheckLayerMask;
     [SerializeField] private float swingCooldown = 2f;
+    [SerializeField] private Renderer[] visualsToColor;
 
     private Animator animator;
     private const string SWING = "Swing";
@@ -20,10 +21,11 @@ public class BaseballBat : Item {
         OnHit = new EventHandler<EventArgs>(OnHit);
     }
 
-    private void Update() {
+    public void Update() {
         if (swingTimer > 0) {
             swingTimer -= Time.deltaTime;
         }
+        Debug.Log(swingTimer);
     }
 
     public override void HandleUse() {
@@ -31,6 +33,19 @@ public class BaseballBat : Item {
             animator.SetTrigger(SWING);
             swingTimer = swingCooldown;
         }
+    }
+
+    public override void Equip() {
+        if (!gameObject.activeSelf) {
+            gameObject.SetActive(true);
+        }
+        foreach (Renderer visual in visualsToColor) {
+            visual.material = GetData().material;
+        }
+    }
+
+    public override void Unequip() {
+        gameObject.SetActive(false);
     }
 
     private void OnTriggerEnter(Collider other) {
