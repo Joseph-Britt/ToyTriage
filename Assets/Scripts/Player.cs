@@ -1,7 +1,10 @@
+using Cinemachine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class Player : MonoBehaviour {
 
@@ -11,16 +14,21 @@ public class Player : MonoBehaviour {
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float sprintSpeed = 8f;
     [SerializeField] private float rotationSpeed = 1f;
+    [SerializeField] private CinemachineVirtualCamera playerCamera;
     [SerializeField] private float jumpPower = 2f;
     [SerializeField] private float jumpCooldown = .2f;
     [SerializeField] private LayerMask groundLayerMask;
     [Header("Interaction")]
-    [SerializeField] private Transform holdPoint;
+    [SerializeField] private GameObject playerVisual;
+    [Header("Items")]
+    [SerializeField] Item[] items;
 
     private Rigidbody rb;
     private float jumpCooldownTimer;
     private List<IInteractable> interactables;
-    private GameObject item;
+    private Item item;
+    private bool inInteraction;
+    private Action OnExitInteraction;
 
     private void Awake() {
         if (Instance == null) {
@@ -30,16 +38,22 @@ public class Player : MonoBehaviour {
         }
         rb = GetComponent<Rigidbody>();
         interactables = new List<IInteractable>();
+        inInteraction = false;
     }
 
     private void Update() {
         // Movement
-        HandleMovement();
-        HandleRotation();
-        //HandleJumping();
+        if (!inInteraction) {
+            HandleMovement();
+            HandleRotation();
+            //HandleJumping();
+        }
 
         // Interaction
         HandleInteraction();
+
+        // Items
+        HandleItemUse();
     }
 
     private void HandleMovement() {
@@ -53,8 +67,14 @@ public class Player : MonoBehaviour {
 
     private void HandleRotation() {
         Vector2 mouseDelta = rotationSpeed * Time.deltaTime * InputSystem.Instance.GetMousePositionDelta();
-        Vector3 rotationVector = transform.rotation.eulerAngles + new Vector3(-mouseDelta.y, mouseDelta.x, 0);
-        transform.rotation = Quaternion.Euler(rotationVector);
+
+        // Rotate child camera only for xRotation
+        Vector3 xRotation = playerCamera.transform.rotation.eulerAngles + new Vector3(-mouseDelta.y, 0, 0);
+        playerCamera.transform.rotation = Quaternion.Euler(xRotation);
+
+        // Rotate parent for yRotation
+        Vector3 yRotation = transform.rotation.eulerAngles + new Vector3(0, mouseDelta.x, 0);
+        transform.rotation = Quaternion.Euler(yRotation);
     }
 
     private void HandleJumping() {
@@ -66,24 +86,65 @@ public class Player : MonoBehaviour {
 
     private void HandleInteraction() {
         if (Input.GetKeyDown(KeyCode.E)) {
-            if (interactables.Count > 0) {
+            if (inInteraction) {
+                ExitInteractionEarly();
+            } else if (interactables.Count > 0) {
                 interactables[interactables.Count() - 1].Interact();
             }
         }
     }
 
-    public void Equip(GameObject item) {
-        this.item = item;
-        item.transform.parent = holdPoint;
-        Debug.Log("Equipped " + item.name);
+    private void HandleItemUse() {
+        if (item != null) {
+            item.HandleUse();
+        }
+    }
+
+    public void Equip(Item item) {
+        if (item != null) {
+            this.item = item;
+            item.Equip();
+        }
+    }
+
+    public bool Unequip() {
+        if (HasItemEquipped()) {
+            item.Unequip();
+            item = null;
+            return true;
+        }
+        return false;
     }
 
     public bool HasItemEquipped() {
         return item != null;
     }
 
+    // Interaction calls when beginning
+    public void StartInteraction(Action OnExitInteraction) {
+        inInteraction = true;
+        rb.velocity = Vector3.zero;
+        this.OnExitInteraction = OnExitInteraction;
+    }
+
+    // Interaction calls when complete
+    public void EndInteraction() {
+        inInteraction = false;
+    }
+
+    // Used for when the player cancels an interaction early
+    private void ExitInteractionEarly() {
+        OnExitInteraction?.Invoke();
+        OnExitInteraction = null;
+        inInteraction = false;
+    }
+    
+    public GameObject GetVisual() {
+        return playerVisual;
+    }
+
     private void OnCollisionStay(Collision collision) {
-        if (LayerInMask(collision.gameObject.layer, groundLayerMask) && jumpCooldown > 0) {
+        if (Utils.LayerInMask(collision.gameObject.layer, groundLayerMask) && jumpCooldown > 0) {
             jumpCooldownTimer -= Time.deltaTime;
         }
     }
@@ -98,9 +159,5 @@ public class Player : MonoBehaviour {
         if (other.gameObject.TryGetComponent(out IInteractable interactable)) {
             interactables.Remove(interactable);
         }
-    }
-
-    private bool LayerInMask(int layer, LayerMask mask) {
-        return groundLayerMask == (1 << layer);
     }
 }

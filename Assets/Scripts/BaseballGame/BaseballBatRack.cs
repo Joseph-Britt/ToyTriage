@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BaseballBatRack : MonoBehaviour, IInteractable {
 
+    [SerializeField] private BaseballBat playerBaseballBatItem;
     [SerializeField] private float spawnRate = 2f;
     [SerializeField] private GameObject baseballBatPrefab;
     [SerializeField] private Transform spawnPosition;
@@ -24,7 +25,8 @@ public class BaseballBatRack : MonoBehaviour, IInteractable {
 
     public void Interact() {
         if (baseballBat != null && !Player.Instance.HasItemEquipped()) {
-            Player.Instance.Equip(baseballBat);
+            Player.Instance.Equip(playerBaseballBatItem);
+            Destroy(baseballBat);
             baseballBat = null;
         }
     }

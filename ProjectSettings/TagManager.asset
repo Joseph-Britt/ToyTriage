@@ -13,9 +13,9 @@ TagManager:
   - UI
   - Ground
   - Interactable
-  - 
-  - 
-  - 
+  - Walls
+  - Items
+  - BaseballHitCheck
   - 
   - 
   - 

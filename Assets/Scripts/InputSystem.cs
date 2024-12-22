@@ -42,4 +42,8 @@ public class InputSystem : MonoBehaviour {
     public bool IsSprinting() {
         return Input.GetKey(KeyCode.LeftShift);
     }
+
+    public bool GetMouseButtonDown(int button) {
+        return Input.GetMouseButtonDown(button);
+    }
 }
