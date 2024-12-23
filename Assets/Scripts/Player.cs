@@ -61,8 +61,8 @@ public class Player : MonoBehaviour {
     }
 
     private void HandleMovement() {
-        Vector2 moveVector = Time.deltaTime * InputSystem.Instance.GetMoveVector();
-        moveVector *= InputSystem.Instance.IsSprinting() ? sprintSpeed : moveSpeed;
+        Vector2 moveVector = Time.deltaTime * InputSystem.GetMoveVector();
+        moveVector *= InputSystem.IsSprinting() ? sprintSpeed : moveSpeed;
         float angle = -transform.rotation.eulerAngles.y * Mathf.Deg2Rad;
         float dx = moveVector.x * Mathf.Cos(angle) - moveVector.y * Mathf.Sin(angle);
         float dy = moveVector.x * Mathf.Sin(angle) + moveVector.y * Mathf.Cos(angle);
@@ -70,7 +70,7 @@ public class Player : MonoBehaviour {
     }
 
     private void HandleRotation() {
-        Vector2 mouseDelta = rotationSpeed * Time.deltaTime * InputSystem.Instance.GetMousePositionDelta();
+        Vector2 mouseDelta = rotationSpeed * Time.deltaTime * InputSystem.GetMousePositionDelta();
 
         // Rotate child camera only for xRotation
         Vector3 cameraAngles = playerCamera.transform.rotation.eulerAngles;
@@ -95,14 +95,14 @@ public class Player : MonoBehaviour {
     }
 
     private void HandleJumping() {
-        if (InputSystem.Instance.IsJumping() && jumpCooldownTimer <= 0f) {
+        if (InputSystem.IsJumping() && jumpCooldownTimer <= 0f) {
             rb.AddForce(jumpPower * -Physics.gravity);
             jumpCooldownTimer = jumpCooldown;
         }
     }
 
     private void HandleInteraction() {
-        if (Input.GetKeyDown(KeyCode.E)) {
+        if (InputSystem.GetInteract()) {
             if (inInteraction) {
                 ExitInteractionEarly();
             } else if (interactables.Count > 0) {
@@ -112,7 +112,7 @@ public class Player : MonoBehaviour {
     }
 
     private void HandleUpgradeMenu() {
-        if (Input.GetKeyDown(KeyCode.U)) {
+        if (InputSystem.GetUpgradeMenu()) {
             inMenu = !inMenu;
             UpgradeSystemUI.Instance.Activate(inMenu);
         }

@@ -359,6 +359,33 @@ RectTransform:
   m_AnchoredPosition: {x: -122, y: -66}
   m_SizeDelta: {x: 200, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &169976913 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 158871318787076033, guid: 3edb5ca8f75eabe4cbeeb5792d875f95,
+    type: 3}
+  m_PrefabInstance: {fileID: 5305579890770068849}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &169976919
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 169976913}
+  m_Material: {fileID: 13400000, guid: b9646e18b460563428f7356a1365fe81, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.8, y: 0.5, z: 0.5}
+  m_Center: {x: 0, y: 1.52, z: 0.44}
 --- !u!1 &172478869 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8695586090004982857, guid: 9ed3237e10f36d947bc7da65ffa8421a,
@@ -8725,6 +8752,12 @@ PrefabInstance:
       propertyPath: InitialModule.startColor.maxGradient.m_Mode
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1585423236365256750, guid: 3edb5ca8f75eabe4cbeeb5792d875f95,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: b9646e18b460563428f7356a1365fe81,
+        type: 2}
     - target: {fileID: 2957300834250087661, guid: 3edb5ca8f75eabe4cbeeb5792d875f95,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8780,6 +8813,21 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7118294976786106620, guid: 3edb5ca8f75eabe4cbeeb5792d875f95,
+        type: 3}
+      propertyPath: moveSpeed
+      value: 800
+      objectReference: {fileID: 0}
+    - target: {fileID: 7118294976786106620, guid: 3edb5ca8f75eabe4cbeeb5792d875f95,
+        type: 3}
+      propertyPath: sprintSpeed
+      value: 1200
+      objectReference: {fileID: 0}
+    - target: {fileID: 7118294976786106620, guid: 3edb5ca8f75eabe4cbeeb5792d875f95,
+        type: 3}
+      propertyPath: rotationSpeed
+      value: 300
+      objectReference: {fileID: 0}
     - target: {fileID: 8521730720843796334, guid: 3edb5ca8f75eabe4cbeeb5792d875f95,
         type: 3}
       propertyPath: swingTime
@@ -8809,7 +8857,11 @@ PrefabInstance:
     - {fileID: 6416063182186883000, guid: 3edb5ca8f75eabe4cbeeb5792d875f95, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 158871318787076033, guid: 3edb5ca8f75eabe4cbeeb5792d875f95,
+        type: 3}
+      insertIndex: 2
+      addedObject: {fileID: 169976919}
   m_SourcePrefab: {fileID: 100100000, guid: 3edb5ca8f75eabe4cbeeb5792d875f95, type: 3}
 --- !u!1001 &7483737907774586355
 PrefabInstance:

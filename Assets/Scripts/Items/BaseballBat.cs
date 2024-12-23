@@ -32,7 +32,7 @@ public class BaseballBat : Item {
     public override void HandleUse() {
         switch (state) {
             case State.IDLE:
-                if (InputSystem.Instance.GetMouseButton(0)) {
+                if (InputSystem.GetMouseButton(0)) {
                     animator.SetTrigger(SWING);
                     state = State.SWINGING;
                     timer = swingTime;
