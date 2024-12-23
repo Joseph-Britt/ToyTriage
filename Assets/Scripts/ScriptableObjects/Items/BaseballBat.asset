@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BaseballBat
   m_EditorClassIdentifier: 
   itemName: Baseball Bat
-  guessedNiceReward: 10
-  guessedNaughtyReward: 5
-  guessedNicePenalty: -10
-  guessedNaughtyPenalty: -5
+  guessedNiceReward: 12
+  guessedNaughtyReward: 6
+  guessedNicePenalty: -12
+  guessedNaughtyPenalty: -6

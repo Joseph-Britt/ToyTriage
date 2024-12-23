@@ -11,6 +11,8 @@ public class BaseballBat : Item {
     [SerializeField] private LayerMask hitCheckLayerMask;
     [SerializeField] private float swingTime = 2f;
     [SerializeField] private Renderer[] visualsToColor;
+    [SerializeField] private GameObject visual;
+    [SerializeField] private GameObject broken;
 
     private enum State {
         IDLE,
@@ -52,6 +54,8 @@ public class BaseballBat : Item {
         foreach (Renderer visual in visualsToColor) {
             visual.material = GetData().material;
         }
+        visual.SetActive(true);
+        broken.SetActive(false);
     }
 
     public override void Unequip() {
@@ -64,8 +68,9 @@ public class BaseballBat : Item {
                 return;
             }
             baseball.Hit();
-            if (!GetData().isNice) {
-                Debug.Log("Bat broke!");
+            if (GetData().type == ItemSO.Type.NAUGHTY) {
+                visual.SetActive(false);
+                broken.SetActive(true);
             }
             OnHit?.Invoke(this, EventArgs.Empty);
         }

@@ -8,7 +8,7 @@ public class RecyclingBin : MonoBehaviour, IInteractable {
         if (Player.Instance.HasItemEquipped()) {
             Item item = Player.Instance.Unequip();
             ItemSO data = item.GetData();
-            if (!data.isNice) {
+            if (data.type == ItemSO.Type.NAUGHTY) {
                 ScoreSystem.Instance.Reward(data.guessedNaughtyReward);
             } else {
                 ScoreSystem.Instance.Reward(data.guessedNaughtyPenalty);

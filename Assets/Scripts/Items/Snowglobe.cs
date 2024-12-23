@@ -5,6 +5,7 @@ using UnityEngine;
 public class Snowglobe : Item {
 
     [SerializeField] private ParticleSystem snowParticles;
+    [SerializeField] private ParticleSystem globalSnowParticles;
     [SerializeField] private float shakeTime = 1f;
     [SerializeField] private float snowTime = 5f;
     [SerializeField] private float cooldown = 1f;
@@ -39,10 +40,13 @@ public class Snowglobe : Item {
                 if (timer > 0) {
                     timer -= Time.deltaTime;
                 } else {
-                    if (!GetData().isNice) {
+                    if (GetData().type == ItemSO.Type.NAUGHTY) {
                         // Defective
                         state = State.COOLDOWN;
                     } else {
+                        if (GetData().type == ItemSO.Type.SPECIAL) {
+                            globalSnowParticles.Play();
+                        }
                         state = State.SNOWING;
                         timer = snowTime;
                         snowParticles.Play();
@@ -56,6 +60,7 @@ public class Snowglobe : Item {
                     state = State.COOLDOWN;
                     timer = cooldown;
                     snowParticles.Stop();
+                    globalSnowParticles.Stop();
                 }
                 break;
             case State.COOLDOWN:
@@ -74,10 +79,16 @@ public class Snowglobe : Item {
         foreach (Renderer visual in visualsToColor) {
             visual.material = GetData().material;
         }
-        ParticleSystem.MainModule main = snowParticles.main;
+
+        // Update color gradients
         ParticleSystem.MinMaxGradient gradient = new ParticleSystem.MinMaxGradient(GetData().gradient);
         gradient.mode = ParticleSystemGradientMode.RandomColor;
-        main.startColor = gradient;
+
+        ParticleSystem.MainModule spMain = snowParticles.main;
+        spMain.startColor = gradient;
+
+        ParticleSystem.MainModule gspMain = globalSnowParticles.main;
+        gspMain.startColor = gradient;
     }
 
     public override void Unequip() {

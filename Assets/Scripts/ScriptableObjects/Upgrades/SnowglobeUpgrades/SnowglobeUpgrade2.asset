@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: SnowglobeUpgrade2
   m_EditorClassIdentifier: 
   title: Upgrade 2
-  cost: 30
-  niceProbability: 1
+  cost: 50
+  item: 1
+  niceProbability: 0.9
   specialProbability: 0.3

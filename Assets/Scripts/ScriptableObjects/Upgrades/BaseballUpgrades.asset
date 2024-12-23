@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9d67e734e00b384faf7b4d092281d91, type: 3}
+  m_Name: BaseballUpgrades
+  m_EditorClassIdentifier: 
+  upgrades:
+  - {fileID: 11400000, guid: 5914c95b1c02a1b4aae4f51da23ff21a, type: 2}
+  - {fileID: 11400000, guid: 3c653d27d4363f449b100537317c0449, type: 2}
+  - {fileID: 11400000, guid: aa6d79117614070429304776af3ccdaa, type: 2}
+  - {fileID: 11400000, guid: 13958ee9dcdb79c4fae522dbd676c922, type: 2}

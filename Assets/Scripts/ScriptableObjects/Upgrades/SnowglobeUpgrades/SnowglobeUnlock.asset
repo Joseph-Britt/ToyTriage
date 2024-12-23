@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: SnowglobeUnlock
   m_EditorClassIdentifier: 
   title: Unlock
-  cost: 10
+  cost: 0
+  item: 1
   niceProbability: 0.6
-  specialProbability: 0.1
+  specialProbability: 0

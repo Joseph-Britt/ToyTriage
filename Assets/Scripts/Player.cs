@@ -28,6 +28,7 @@ public class Player : MonoBehaviour {
     private List<IInteractable> interactables;
     private Item item;
     private bool inInteraction;
+    private bool inMenu;
     private Action OnExitInteraction;
 
     private void Awake() {
@@ -43,7 +44,7 @@ public class Player : MonoBehaviour {
 
     private void Update() {
         // Movement
-        if (!inInteraction) {
+        if (!inMenu && !inInteraction) {
             HandleMovement();
             HandleRotation();
             //HandleJumping();
@@ -54,6 +55,9 @@ public class Player : MonoBehaviour {
 
         // Items
         HandleItemUse();
+
+        // Upgrade Menu
+        HandleUpgradeMenu();
     }
 
     private void HandleMovement() {
@@ -104,6 +108,13 @@ public class Player : MonoBehaviour {
             } else if (interactables.Count > 0) {
                 interactables[interactables.Count() - 1].Interact();
             }
+        }
+    }
+
+    private void HandleUpgradeMenu() {
+        if (Input.GetKeyDown(KeyCode.U)) {
+            inMenu = !inMenu;
+            UpgradeSystemUI.Instance.Activate(inMenu);
         }
     }
 

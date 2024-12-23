@@ -19,8 +19,8 @@ public class ScoreSystem : MonoBehaviour {
         } else {
             Debug.LogError("There is more than one ScoreSystem " + Instance);
         }
-        OnScoreChanged = new EventHandler<EventArgs>(OnScoreChanged);
-        OnCurrencyChanged = new EventHandler<EventArgs>(OnCurrencyChanged);
+        //OnScoreChanged = new EventHandler<EventArgs>(OnScoreChanged);
+        //OnCurrencyChanged = new EventHandler<EventArgs>(OnCurrencyChanged);
     }
 
     public void Reward(int score) {
