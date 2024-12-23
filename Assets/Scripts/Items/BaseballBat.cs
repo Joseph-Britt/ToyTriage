@@ -10,7 +10,6 @@ public class BaseballBat : Item {
     [SerializeField] private float hitCastMaxDistance = 0.5f;
     [SerializeField] private LayerMask hitCheckLayerMask;
     [SerializeField] private float swingTime = 2f;
-    [SerializeField] private Renderer[] visualsToColor;
     [SerializeField] private GameObject visual;
     [SerializeField] private GameObject broken;
 
@@ -19,13 +18,11 @@ public class BaseballBat : Item {
         SWINGING
     }
 
-    private Animator animator;
     private const string SWING = "Swing";
-    private float timer;
     private State state;
 
-    private void Awake() {
-        animator = GetComponent<Animator>();
+    protected override void Awake() {
+        base.Awake();
         OnHit = new EventHandler<EventArgs>(OnHit);
     }
 
@@ -49,17 +46,12 @@ public class BaseballBat : Item {
     }
 
     public override void Equip() {
-        gameObject.SetActive(true);
+        base.Equip();
         state = State.IDLE;
-        foreach (Renderer visual in visualsToColor) {
-            visual.material = GetData().material;
-        }
+
+        // Update visuals
         visual.SetActive(true);
         broken.SetActive(false);
-    }
-
-    public override void Unequip() {
-        gameObject.SetActive(false);
     }
 
     private void OnTriggerEnter(Collider other) {
@@ -68,7 +60,7 @@ public class BaseballBat : Item {
                 return;
             }
             baseball.Hit();
-            if (GetData().type == ItemSO.Type.NAUGHTY) {
+            if (data.type == ItemSO.Type.NAUGHTY) {
                 visual.SetActive(false);
                 broken.SetActive(true);
             }

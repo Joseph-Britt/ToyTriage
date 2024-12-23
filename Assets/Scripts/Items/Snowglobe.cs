@@ -9,7 +9,6 @@ public class Snowglobe : Item {
     [SerializeField] private float shakeTime = 1f;
     [SerializeField] private float snowTime = 5f;
     [SerializeField] private float cooldown = 1f;
-    [SerializeField] private Renderer[] visualsToColor;
 
     private enum State {
         IDLE,
@@ -18,14 +17,8 @@ public class Snowglobe : Item {
         COOLDOWN
     }
 
-    private Animator animator;
     private const string SHAKE = "Shake";
-    private float timer;
     private State state;
-
-    private void Awake() {
-        animator = GetComponent<Animator>();
-    }
 
     public override void HandleUse() {
         switch (state) {
@@ -40,11 +33,11 @@ public class Snowglobe : Item {
                 if (timer > 0) {
                     timer -= Time.deltaTime;
                 } else {
-                    if (GetData().type == ItemSO.Type.NAUGHTY) {
+                    if (data.type == ItemSO.Type.NAUGHTY) {
                         // Defective
                         state = State.COOLDOWN;
                     } else {
-                        if (GetData().type == ItemSO.Type.SPECIAL) {
+                        if (data.type == ItemSO.Type.SPECIAL) {
                             globalSnowParticles.Play();
                         }
                         state = State.SNOWING;
@@ -74,14 +67,11 @@ public class Snowglobe : Item {
     }
 
     public override void Equip() {
-        gameObject.SetActive(true);
+        base.Equip();
         state = State.IDLE;
-        foreach (Renderer visual in visualsToColor) {
-            visual.material = GetData().material;
-        }
 
         // Update color gradients
-        ParticleSystem.MinMaxGradient gradient = new ParticleSystem.MinMaxGradient(GetData().gradient);
+        ParticleSystem.MinMaxGradient gradient = new ParticleSystem.MinMaxGradient(data.gradient);
         gradient.mode = ParticleSystemGradientMode.RandomColor;
 
         ParticleSystem.MainModule spMain = snowParticles.main;
@@ -89,9 +79,5 @@ public class Snowglobe : Item {
 
         ParticleSystem.MainModule gspMain = globalSnowParticles.main;
         gspMain.startColor = gradient;
-    }
-
-    public override void Unequip() {
-        gameObject.SetActive(false);
     }
 }
